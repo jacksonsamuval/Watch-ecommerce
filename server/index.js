@@ -1,18 +1,25 @@
-const express = require('express')
+const express = require('express');
+const mongoose = require('mongoose');
+const productRoutes = require('./Routes/products');
+const userRoutes = require('./routes/signupRoutes');
+const cors = require('cors');
+const path = require('path');
 const RunServer = require('./Database/connection')
-const userRoutes = require('./Routes/signupRoutes')
-const cors = require('cors')
 
-const app = express()
-const port = 3000;
+const app = express();
 
-app.use(express.json())
-app.use(cors())
+app.use(express.json()); 
+app.use(cors()); 
 
 RunServer()
 
-app.use("/user",userRoutes)
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-app.listen(port, ()=> {
-    console.log(`Server is running on ${port}`);
-})
+app.use('/api/products', productRoutes); 
+
+app.use('/user', userRoutes);
+
+const port = 5000;
+app.listen(port, () => {
+  console.log(`Server is running on http://localhost:${port}`);
+});

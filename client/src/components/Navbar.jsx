@@ -4,16 +4,10 @@ import "../css/Navbar.css";
 
 const Navbar = () => {
   const [isMobile, setIsMobile] = useState(false);
-  const navigate = useNavigate();
-
+ 
   const toggleMobileMenu = () => {
     setIsMobile(!isMobile);
   };
-
-  // const handleLogout = () => {
-  //   localStorage.clear();
-  //   navigate("/");
-  // };
 
   return (
     <nav className="navbar">
@@ -26,25 +20,30 @@ const Navbar = () => {
 
         <ul className={`nav-links ${isMobile ? "active" : ""}`}>
           <li>
-            <Link to="/" className="nav-link">
+            <Link to="/home" className="nav-link">
               Home
             </Link>
           </li>
           <li>
-            <Link to="/about" className="nav-link">
-              About
+            <Link to="/productList" className="nav-link">
+              All Products
             </Link>
           </li>
           <li>
-            <Link to="/contact" className="nav-link">
-              Contact
+            <Link to="/addProductForm" className="nav-link">
+              Add Products
             </Link>
           </li>
-          {/* <li>
-            <button className="nav-link" onClick={handleLogout}>
-              Logout
-            </button>
-          </li> */}
+          <li>
+            <Link to="/cart" className="nav-link">
+              Cart
+            </Link>
+          </li>
+          <li>
+            <Link to="/aboutUs" className="nav-link">
+              About
+            </Link>
+          </li>
         </ul>
 
         <div className="hamburger" onClick={toggleMobileMenu}>

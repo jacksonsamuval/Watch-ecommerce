@@ -12,7 +12,7 @@ const LoginForm = ({ onLoginSuccess }) => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:3000/user/login", {
+      const response = await axios.post("http://localhost:5000/user/login", {
         email,
         password,
       });
@@ -71,7 +71,7 @@ const LoginForm = ({ onLoginSuccess }) => {
 
           <div className="footer">
             <p>
-              Dont have an Account ? <a href="/register">Register</a> 
+              zt have an Account ? <a href="/register">Register</a> 
             </p>
           </div>
         </form>

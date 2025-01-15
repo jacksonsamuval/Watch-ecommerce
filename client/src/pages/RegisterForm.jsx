@@ -21,7 +21,7 @@ const RegisterForm = ({ onRegisterSuccess }) => {
       return;
     }
     try {
-      const response = await axios.post("http://localhost:3000/user/", {
+      const response = await axios.post("http://localhost:5000/user/", {
         firstName,
         lastName,
         email,

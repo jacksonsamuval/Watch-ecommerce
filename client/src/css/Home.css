@@ -69,6 +69,7 @@ h2 {
     font-weight: bold;
     margin-bottom: 15px;
     text-transform: uppercase;
+    color: #f3f3f3;
   }
   
   .hero-subtitle {
@@ -177,7 +178,7 @@ h2 {
 
 .add-to-cart {
   margin-top: 10px;
-  background-color: #333;
+  background-color: #323881;
   color: #fff;
   border: none;
   padding: 10px;
@@ -185,7 +186,7 @@ h2 {
 }
 
 .add-to-cart:hover {
-  background-color: #555;
+  background-color: #4131f1;
 }
 
 /* Testimonials Section */
@@ -208,34 +209,103 @@ h2 {
 }
 
 /* Newsletter Section */
+/* General newsletter styling */
 .newsletter {
-  background: #333;
-  color: #fff;
-  padding: 40px 20px;
+  background-color: #f4f4f4;
+  padding: 50px 20px;
   text-align: center;
 }
 
-.newsletter-content input {
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-  margin-right: 10px;
+.newsletter-content {
+  max-width: 600px;
+  margin: 0 auto;
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-.newsletter-content button {
-  background-color: rgb(49, 55, 132);
+.newsletter h2 {
+  font-size: 28px;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.newsletter p {
+  font-size: 18px;
+  color: #555;
+  margin-bottom: 30px;
+}
+
+.newsletter form {
+  display: flex;
+  flex-direction: column;
+}
+
+.newsletter input[type="email"] {
+  padding: 15px;
+  font-size: 16px;
+  margin-bottom: 15px;
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  transition: border 0.3s ease;
+}
+
+.newsletter input[type="email"]:focus {
+  outline: none;
+  border-color: #4131f1;
+}
+
+.newsletter button {
+  padding: 15px;
+  font-size: 16px;
+  background-color: #4131f1;
   color: white;
-  padding: 10px 20px;
   border: none;
   border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.newsletter button:hover {
+  background-color: #322f7c;
+}
+
+.newsletter button:active {
+  background-color: #322f7c;
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+  .newsletter {
+    padding: 40px 15px;
+  }
+
+  .newsletter-content {
+    padding: 25px;
+  }
+
+  .newsletter h2 {
+    font-size: 24px;
+  }
+
+  .newsletter p {
+    font-size: 16px;
+  }
+
+  .newsletter input[type="email"], 
+  .newsletter button {
+    font-size: 14px;
+    padding: 12px;
+  }
 }
 
 /* Footer */
 .footer {
   text-align: center;
   padding: 20px 0;
-  background: #222;
-  color: #fff;
+  background: white;
+  color: #333;
 }
 
 .footer-links a {
@@ -246,4 +316,17 @@ h2 {
 
 .footer-links a:hover {
   text-decoration: underline;
+}
+
+a.collection {
+  text-decoration: none; 
+  color: inherit; 
+}
+
+a.collection .normal-text {
+  color: black; 
+}
+
+a.collection:hover {
+  color: inherit; 
 }
