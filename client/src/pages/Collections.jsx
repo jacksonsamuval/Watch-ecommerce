@@ -19,7 +19,6 @@ const Collections = () => {
         const randomCategory = categories[Math.floor(Math.random() * categories.length)];
         setSelectedCategory(randomCategory);
 
-        // Filter products by the random selected category
         const categoryProducts = allProducts.filter(product => product.category === randomCategory);
         setFilteredProducts(categoryProducts);
       } catch (error) {
