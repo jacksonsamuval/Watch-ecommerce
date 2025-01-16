@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import '../css/ProductList.css'; // Import the CSS for styling
+import '../css/ProductList.css';
 
 const ModernClassicCollection = () => {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
-  const [loading, setLoading] = useState(true); // State to track loading
+  const [loading, setLoading] = useState(true); 
+  const [userId, setUserId] = useState(localStorage.getItem("id")); 
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -13,7 +14,6 @@ const ModernClassicCollection = () => {
         const response = await axios.get('http://localhost:5000/api/products/get-products');
         const allProducts = response.data;
 
-        // Filter products by category "Modern Classics"
         const luxuryProducts = allProducts.filter(
           (product) => product.category === 'Modern Classics'
         );
@@ -23,13 +23,30 @@ const ModernClassicCollection = () => {
       } catch (error) {
         console.error('Error fetching products:', error);
       } finally {
-        setLoading(false); // Stop loading once the data is fetched
+        setLoading(false);
       }
     };
 
     fetchProducts();
   }, []);
+  const handleAddToCart = async (productId) => {
+    if (!userId) {
+      alert("Please log in to add products to the cart");
+      return;
+    }
 
+    try {
+      const response = await axios.post("http://localhost:5000/api/cart/add-to-cart", {
+        userId: userId, 
+        productId: productId,
+        quantity: 1, 
+      });
+      alert(response.data.message); 
+    } catch (error) {
+      console.error("Error adding to cart:", error);
+      alert("Failed to add product to cart.");
+    }
+  };
   if (loading) {
     return (
       <div className="loading">
@@ -56,7 +73,12 @@ const ModernClassicCollection = () => {
                 <p className="product-price">${product.price}</p>
                 <p className="product-category">{product.category}</p>
                 <p className="product-stock">Stock: {product.stock}</p>
-                <button className="product-button">Add to Cart</button>
+                <button
+                  className="product-button"
+                  onClick={() => handleAddToCart(product._id)} 
+                >
+                  Add to Cart
+                </button>
               </div>
             </div>
           ))}

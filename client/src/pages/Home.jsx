@@ -5,6 +5,7 @@ import "../css/Home.css";
 
 const Home = () => {
   const [products, setProducts] = useState([]);
+  const [userId, setUserId] = useState(localStorage.getItem("id")); 
   const navigate = useNavigate();
 
   const handleShopNow = () => navigate("/productList");
@@ -25,33 +26,39 @@ const Home = () => {
     fetchProducts();
   }, []);
 
+  const handleAddToCart = async (productId) => {
+    if (!userId) {
+      alert("Please log in to add products to the cart");
+      return;
+    }
+
+    try {
+      const response = await axios.post("http://localhost:5000/api/cart/add-to-cart", {
+        userId: localStorage.getItem("id"),  
+        productId: productId,
+        quantity: 1, 
+      });
+      alert(response.data.message); 
+    } catch (error) {
+      console.error("Error adding to cart:", error);
+      alert("Failed to add product to cart.");
+    }
+  };
+
   return (
     <div className="home">
       {/* Hero Section */}
       <section className="hero-section">
         <div className="hero-image-container">
-          <img
-            src="banner04.jpg" 
-            alt="Timeless Elegance"
-            className="hero-image"
-          />
+          <img src="banner04.jpg" alt="Timeless Elegance" className="hero-image" />
         </div>
         <div className="hero-overlay">
           <div className="hero-content">
             <h1 className="hero-title">Timeless Elegance</h1>
-            <p className="hero-subtitle">
-              Elevate your style with our exclusive collection of watches.
-            </p>
+            <p className="hero-subtitle">Elevate your style with our exclusive collection of watches.</p>
             <div className="hero-buttons">
-              <button className="cta-button primary" onClick={handleShopNow}>
-                Shop Now
-              </button>
-              <button
-                className="cta-button secondary"
-                onClick={handleExploreCollections}
-              >
-                Explore Collections
-              </button>
+              <button className="cta-button primary" onClick={handleShopNow}>Shop Now</button>
+              <button className="cta-button secondary" onClick={handleExploreCollections}>Explore Collections</button>
             </div>
           </div>
         </div>
@@ -61,28 +68,28 @@ const Home = () => {
       <section className="collections-section">
         <h2>Our Featured Collections</h2>
         <div className="collection-grid">
-        <a href="/luxury-collection" className="collection">
-        <div className="collection">
-            <img src="Rolex02.jpg" alt="Luxury Collection" />
-            <h3 className="normal-text">Luxury Collection</h3>
-            <p className="normal-text">Crafted for sophistication and style.</p>
-        </div>
-        </a>
+          <a href="/luxury-collection" className="collection">
+            <div className="collection">
+              <img src="Rolex02.jpg" alt="Luxury Collection" />
+              <h3 className="normal-text">Luxury Collection</h3>
+              <p className="normal-text">Crafted for sophistication and style.</p>
+            </div>
+          </a>
 
-        <a href="/modernClassical" className="collection">
-        <div className="collection">
-            <img src="fossil05.jpg" alt="Modern Classics" />
-            <h3 className="normal-text">Modern Classics</h3>
-            <p className="normal-text">Crafted for sophistication and style.</p>
-        </div>
-        </a>
-        <a href="/sports" className="collection">
-        <div className="collection">
-            <img src="sport02.jpg" alt="Sports" />
-            <h3 className="normal-text">Sports Series</h3>
-            <p className="normal-text">Durable and dynamic watches for the active life.</p>
-        </div>
-        </a>
+          <a href="/modernClassical" className="collection">
+            <div className="collection">
+              <img src="fossil05.jpg" alt="Modern Classics" />
+              <h3 className="normal-text">Modern Classics</h3>
+              <p className="normal-text">Crafted for sophistication and style.</p>
+            </div>
+          </a>
+          <a href="/sports" className="collection">
+            <div className="collection">
+              <img src="sport02.jpg" alt="Sports" />
+              <h3 className="normal-text">Sports Series</h3>
+              <p className="normal-text">Durable and dynamic watches for the active life.</p>
+            </div>
+          </a>
         </div>
       </section>
 
@@ -98,10 +105,15 @@ const Home = () => {
                   alt={product.name}
                   className="product-image"
                 />
-                <h3>{product.name}</h3> <br/>
+                <h3>{product.name}</h3> <br />
                 <p style={{ color: "green" }}>${product.price}</p>
-                <p style={{ color: "grey" }}>${product.description}</p>
-                <button className="add-to-cart">Add to Cart</button>
+                <p style={{ color: "grey" }}>{product.description}</p>
+                <button
+                  className="add-to-cart"
+                  onClick={() => handleAddToCart(product._id)} // Pass productId to handleAddToCart
+                >
+                  Add to Cart
+                </button>
               </div>
             ))}
           </div>
@@ -131,8 +143,7 @@ const Home = () => {
 
       {/* Footer Section */}
       <footer className="footer">
-        <div className="footer-links">
-        </div>
+        <div className="footer-links"></div>
         <p>&copy; 2025 JS. All rights reserved.</p>
       </footer>
     </div>

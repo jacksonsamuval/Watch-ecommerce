@@ -5,6 +5,9 @@ import "../css/Navbar.css";
 const Navbar = () => {
   const [isMobile, setIsMobile] = useState(false);
  
+  const userEmail = localStorage.getItem("email");
+  console.log(userEmail); // This will print the saved email
+
   const toggleMobileMenu = () => {
     setIsMobile(!isMobile);
   };

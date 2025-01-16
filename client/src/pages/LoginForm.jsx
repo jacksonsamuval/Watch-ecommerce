@@ -16,13 +16,18 @@ const LoginForm = ({ onLoginSuccess }) => {
         email,
         password,
       });
-        localStorage.setItem("firstName", response.data.firstName); 
-        localStorage.setItem("lastName", response.data.lastName);
-        localStorage.setItem("email", response.data.email); 
-        if (onLoginSuccess) onLoginSuccess();
-        alert("Login Successfull")
-        console.log("Login SuccessFull");
-        navigate("/home")
+      console.log("Email from response:", response.data.data.email);
+      console.log("Id from response:", response.data.data._id);
+      localStorage.setItem("firstName", response.data.data.firstName); 
+      localStorage.setItem("lastName", response.data.data.lastName);
+      localStorage.setItem("email", response.data.data.email); 
+      localStorage.setItem("id", response.data.data._id); 
+      
+      if (onLoginSuccess) onLoginSuccess();
+      alert("Login Successfull");
+      console.log("Login Successful");
+
+      navigate("/home");
         
     } catch (error) {
       setError("Login failed. Please check your credentials.");
@@ -34,8 +39,8 @@ const LoginForm = ({ onLoginSuccess }) => {
     <div className="login-wrapper">
       <div className="login-container">
         <form onSubmit={handleLogin} className="login-form">
-          <div className="logo-container">
-            <img src="#" alt="Logo" className="logo" />
+          <div className="navbar-logo">
+              <h1>JK</h1>  <br/>
           </div>
 
           <h2>Welcome Back</h2>
@@ -71,7 +76,7 @@ const LoginForm = ({ onLoginSuccess }) => {
 
           <div className="footer">
             <p>
-              zt have an Account ? <a href="/register">Register</a> 
+              Don't have an Account ? <a href="/register">Register</a> 
             </p>
           </div>
         </form>

@@ -5,6 +5,7 @@ const userRoutes = require('./routes/signupRoutes');
 const cors = require('cors');
 const path = require('path');
 const RunServer = require('./Database/connection')
+const cartRoutes = require('./Routes/Cart')
 
 const app = express();
 
@@ -18,6 +19,8 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use('/api/products', productRoutes); 
 
 app.use('/user', userRoutes);
+
+app.use('/api/cart',cartRoutes);
 
 const port = 5000;
 app.listen(port, () => {

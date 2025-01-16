@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import '../css/ProductList.css';  // Import the CSS for styling
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
+  const [userId, setUserId] = useState(localStorage.getItem("id")); 
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -17,6 +20,25 @@ const ProductList = () => {
 
     fetchProducts();
   }, []);
+
+  const handleAddToCart = async (productId) => {
+    if (!userId) {
+      alert("Please log in to add products to the cart");
+      return;
+    }
+
+    try {
+      const response = await axios.post("http://localhost:5000/api/cart/add-to-cart", {
+        userId: userId, 
+        productId: productId,
+        quantity: 1, 
+      });
+      alert(response.data.message); 
+    } catch (error) {
+      console.error("Error adding to cart:", error);
+      alert("Failed to add product to cart.");
+    }
+  };
 
   return (
     <div className="product-list">
@@ -36,7 +58,12 @@ const ProductList = () => {
                 <p className="product-price">${product.price}</p>
                 <p className="product-category">{product.category}</p>
                 <p className="product-stock">Stock: {product.stock}</p>
-                <button className="product-button">Add to Cart</button>
+                <button
+                  className="product-button"
+                  onClick={() => handleAddToCart(product._id)} 
+                >
+                  Add to Cart
+                </button>
               </div>
             </div>
           ))}
