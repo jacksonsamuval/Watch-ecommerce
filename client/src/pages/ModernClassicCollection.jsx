@@ -70,7 +70,7 @@ const ModernClassicCollection = () => {
               <div className="product-details">
                 <h2>{product.name}</h2>
                 <p className="product-description">{product.description}</p>
-                <p className="product-price">${product.price}</p>
+                <p className="product-price">₹{product.price}</p>
                 <p className="product-category">{product.category}</p>
                 <p className="product-stock">Stock: {product.stock}</p>
                 <button

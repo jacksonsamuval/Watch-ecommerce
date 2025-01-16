@@ -106,7 +106,7 @@ const Home = () => {
                   className="product-image"
                 />
                 <h3>{product.name}</h3> <br />
-                <p style={{ color: "green" }}>${product.price}</p>
+                <p style={{ color: "green" }}>₹{product.price}</p>
                 <p style={{ color: "grey" }}>{product.description}</p>
                 <button
                   className="add-to-cart"

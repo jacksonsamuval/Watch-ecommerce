@@ -65,7 +65,7 @@ const Cart = () => {
     <div className="product-list">
       <h1>Cart</h1>
       <div className="cart-summary">
-            <h2>Total Price: ${totalPrice.toFixed(2)}</h2>
+            <h2>Total Price: ₹{totalPrice.toFixed(2)}</h2>
             <button className="buy-now-button" onClick={handleBuyNow}>
               Buy Now
             </button> <br/>
@@ -83,7 +83,7 @@ const Cart = () => {
                 <div className="product-details">
                   <h2>{item.productId.name}</h2>
                   <p className="product-description">{item.productId.description}</p>
-                  <p className="product-price">${item.productId.price}</p>
+                  <p className="product-price">₹{item.productId.price}</p>
                   <p className="product-category">{item.productId.category}</p>
                   <p className="product-stock">Stock: {item.productId.stock}</p>
                   <p className="product-quantity">Quantity: {item.quantity}</p> <br/>
