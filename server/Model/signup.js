@@ -20,7 +20,7 @@ const userSchema = new mongoose.Schema({
         required: true,
         minlength: 8
     },
-    cart : [cartItemSchema],
+    cart: [cartItemSchema],
 }, { timestamps: true });
 
 const User = mongoose.model('User', userSchema);

@@ -17,7 +17,7 @@ const Navbar = () => {
       <div className="navbar-container">
         <div className="navbar-left">
           <div className="navbar-logo">
-            <h1>JacKson</h1>
+            <h1>JK</h1>
           </div>
         </div>
 
